@@ -2,12 +2,18 @@ import os
 from PyPDF2 import PdfFileReader, PdfFileWriter, PdfFileMerger
 from pdfminer.high_level import extract_text
 
-path = f"{cwd}/Output"
-path2 = f"{cwd}/Output/Processed"
+"""JOSH CHEAT SHEET"""
+name_of_pdf = 'Autostack 03.22.pdf'
+search_string = 'INV4'
+# search_string = 'ABTL'
+""""""
+
+path = os.path.join(os.getcwd(), 'Output')
+path2 = os.path.join(os.getcwd(), 'Output/Processed')
 os.mkdir(path)
 os.mkdir(path2)
 
-pdf_file_path = 'May 21.pdf'
+pdf_file_path = name_of_pdf
 file_base_name = pdf_file_path.replace('.pdf', '')
 
 output_folder_path = os.path.join(os.getcwd(), 'Output')
@@ -23,17 +29,12 @@ for page_num in range(pdf.numPages):
         f.close()
 
 dir_list = os.listdir(path)
-
 num_of_files = len(dir_list) - 1
-
 for invoice in range(num_of_files):
-    print(invoice)
     current_file = f"{path}/{invoice}.pdf"
-    print(current_file)
     text = extract_text(current_file)
 
-    invoice_num = str(text[text.find('ABTL'):text.find('ABTL') + 11]).strip()
-
+    invoice_num = str(text[text.find(search_string):text.find(search_string) + 11]).strip()
     pdf = PdfFileReader(current_file)
     if text.find('1 of 1') != -1:
         pdfWriter = PdfFileWriter()
