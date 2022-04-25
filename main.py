@@ -2,8 +2,8 @@ import os
 from PyPDF2 import PdfFileReader, PdfFileWriter, PdfFileMerger
 from pdfminer.high_level import extract_text
 
-path = "C:/Users/ernes/PycharmProjects/pdfFileSplitter/Output"
-path2 = "C:/Users/ernes/PycharmProjects/pdfFileSplitter/Output/Processed"
+path = f"{cwd}/Output"
+path2 = f"{cwd}/Output/Processed"
 os.mkdir(path)
 os.mkdir(path2)
 
